@@ -1,4 +1,9 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
 
-createApp(App).mount('#app')
+const AdIntel = createApp(App);
+
+AdIntel.use(router);
+
+AdIntel.mount("#app");
