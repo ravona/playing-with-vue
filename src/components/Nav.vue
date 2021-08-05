@@ -4,6 +4,7 @@
       <li class="nav__item">
         <router-link to="/">Home</router-link>
       </li>
+
       <li class="nav__item">
         <router-link to="/charts">Charts</router-link>
       </li>
