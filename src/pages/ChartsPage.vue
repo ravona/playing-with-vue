@@ -8,12 +8,8 @@
   </div>
 
   <div class="chart__menu">
-    <Button text="Remove Vehicle" @cbFunc="removeRandomItem"
-      >Remove Vehicle</Button
-    >
-    <Button text="Randomize Chart Type" @cbFunc="randomizeChartType">
-      Randomize Chart Type
-    </Button>
+    <Button text="Remove Vehicle" @cbFunc="removeRandomItem" />
+    <Button text="Toggle Chart Type" @cbFunc="randomizeChartType" />
   </div>
 </template>
 
