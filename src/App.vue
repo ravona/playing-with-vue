@@ -1,18 +1,17 @@
 <template>
-  <!-- header component: -->
-  <img class="logo" alt="ironSource logo" src="./assets/logo.svg" />
-  <h1 class="title">Vue.js app by Asaf Ravona</h1>
-
+  <Header />
   <Nav />
   <router-view></router-view>
 </template>
 
 <script>
 import Nav from "./components/Nav.vue";
+import Header from "./components/Header.vue";
 
 export default {
   name: "App",
   components: {
+    Header,
     Nav,
   },
 };
@@ -27,9 +26,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 1rem;
-}
-
-.logo {
-  width: 180px;
 }
 </style>

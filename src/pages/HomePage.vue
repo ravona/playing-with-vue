@@ -1,6 +1,6 @@
 <template>
   <h1>Home Page</h1>
-  <button type="button">
+  <button class="button" type="button">
     <router-link to="/charts">Charts</router-link>
   </button>
 </template>
@@ -10,3 +10,9 @@ export default {
   name: "HomePage",
 };
 </script>
+
+<style lang="scss" scoped>
+.button {
+  margin: 0 auto;
+}
+</style>

@@ -1,6 +1,7 @@
 <template>
+  <h5>You are watching a {{ chartType }} chart</h5>
   <div :class="['chart', `chart--${chartType}`]">
-    <canvas id="myChart" width="400" height="400" />
+    <canvas id="mainChart" width="400" height="400" />
   </div>
 </template>
 
@@ -19,90 +20,77 @@ export default {
     },
   },
   data() {
-    // state
     return {
       chartType: "pie",
-      parsedChartData: null,
-      chartConfig: null,
     };
   },
-  watch: {
-    chartData: {
-      handler(newChartData) {
-        this.parseChartData(newChartData);
-      },
-    },
-    // TODO
-    // chartConfig: {
-    //   handler(chartConfig, chartType) {
-    //     this.renderChart(chartConfig, chartType);
-    //   },
-    // },
-    shouldToggleChartType: {
-      handler(toggleState) {
-        this.toggleChartType(toggleState);
-      },
-    },
-  },
-
-  created() {
-    console.log("created: ", this.$data);
-  },
-  mounted() {
-    console.log("mounted: ", this.$data);
-    Chart.register(...registerables);
-    this.parseChartData(this.chartData);
-    this.setChartConfig(
-      this.parsedChartData.vehicle,
-      this.parsedChartData.price
-    );
-
-    this.renderChart(this.chartType, this.chartConfig);
-  },
-  methods: {
-    parseChartData() {
-      // Transforms an array of objects to arrays grouped by value type ([...vehicles], [...prices])
-      this.parsedChartData = this.chartData.reduce(
-        (accumulator, currentValue) => {
-          // eslint-disable-next-line no-restricted-syntax
-          for (const [key, value] of Object.entries(currentValue)) {
-            if (!accumulator[key]) {
-              accumulator[key] = [];
-            }
-            accumulator[key].push(value);
+  computed: {
+    parsedChartData() {
+      return this.chartData.reduce((accumulator, currentValue) => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const [key, value] of Object.entries(currentValue)) {
+          if (!accumulator[key]) {
+            accumulator[key] = [];
           }
-          return accumulator;
-        },
-        {}
-      );
-      return this.parsedChartData;
+          accumulator[key].push(value);
+        }
+        return accumulator;
+      }, {});
     },
 
-    // Transforms an array of objects to arrays grouped by value type ([...vehicles], [...prices])
-    setChartConfig(labels, data) {
-      this.chartConfig = {
-        labels,
+    chartConfig() {
+      return {
+        labels: this.parsedChartData.vehicle,
         datasets: [
           {
             label: "AdIntel Chart",
-            data,
+            data: this.parsedChartData.price,
             backgroundColor: [
               "rgb(255, 100, 50)",
               "rgb(50, 255, 100)",
               "rgb(100, 50, 255)",
+              "rgb(70, 50, 20)",
+              "rgb(50, 200, 200)",
             ],
             hoverOffset: 4,
           },
         ],
       };
     },
-    renderChart(chartType, chartConfig) {
+  },
+  watch: {
+    chartData: {
+      handler(newChartData) {
+        this.parsedChartData = newChartData;
+      },
+    },
+    shouldToggleChartType: {
+      handler(toggledState) {
+        this.toggleChartType(toggledState);
+      },
+    },
+  },
+  mounted() {
+    Chart.register(...registerables);
+    this.renderChart();
+  },
+  updated() {
+    if (Chart.getChart("mainChart") !== undefined) {
+      Chart.getChart("mainChart").destroy();
+      this.renderChart();
+    }
+  },
+  methods: {
+    // eslint-disable-next-line no-unused-vars
+    renderChart() {
       const config = {
-        type: chartType,
-        data: chartConfig,
+        type: this.chartType,
+        data: this.chartConfig,
       };
 
-      this.chartElement = new Chart("myChart", config);
+      const mainChart = new Chart("mainChart", config);
+
+      console.log(mainChart);
     },
     toggleChartType() {
       this.shouldToggleChartType === true
@@ -118,7 +106,7 @@ export default {
   height: auto;
 }
 
-#myChart {
+#mainChart {
   height: 360px;
   width: 360px;
   margin: 0 auto;

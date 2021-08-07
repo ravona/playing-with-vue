@@ -36,13 +36,6 @@ export default {
 .nav__item {
   font-size: 1.5rem;
   margin-bottom: 10px;
-  font-weight: normal;
-  transition: all 0.2s ease-in-out;
-
-  &:hover {
-    font-weight: bold;
-    transition: all 0.2s ease-in-out;
-  }
 
   @media only screen and (min-width: map-get($screen_sizes, $key: "desktop" )) {
     margin: 0 10px;
