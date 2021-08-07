@@ -1,7 +1,7 @@
 <template>
   <h5>You are watching a {{ chartType }} chart</h5>
   <div :class="['chart', `chart--${chartType}`]">
-    <canvas id="mainChart" width="400" height="400" />
+    <canvas id="mainChart" />
   </div>
 </template>
 
@@ -89,8 +89,7 @@ export default {
       };
 
       const mainChart = new Chart("mainChart", config);
-
-      console.log(mainChart);
+      return mainChart;
     },
     toggleChartType() {
       this.shouldToggleChartType === true
@@ -107,8 +106,8 @@ export default {
 }
 
 #mainChart {
-  height: 360px;
-  width: 360px;
+  height: 500px;
+  width: 500px;
   margin: 0 auto;
 }
 </style>

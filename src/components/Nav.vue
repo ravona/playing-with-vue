@@ -4,7 +4,6 @@
       <li class="nav__item">
         <router-link to="/">Home</router-link>
       </li>
-
       <li class="nav__item">
         <router-link to="/charts">Charts</router-link>
       </li>
@@ -35,10 +34,10 @@ export default {
 
 .nav__item {
   font-size: 1.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 1rem;
 
   @media only screen and (min-width: map-get($screen_sizes, $key: "desktop" )) {
-    margin: 0 10px;
+    margin: 0 1rem;
   }
 }
 </style>
