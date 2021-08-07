@@ -1,6 +1,8 @@
 <template>
   <h1>Charts Page</h1>
-  <Chart :chart-data="chartData" />
+  <div v-if="chartData">
+    <Chart :chart-data="chartData" />
+  </div>
   <Button text="Remove Vehicle" @cbFunc="removeRandomItem"
     >Remove Vehicle</Button
   >
@@ -26,8 +28,7 @@ export default {
   emits: ["removeRandomItem", "randomizeChartType"],
   data() {
     return {
-      chartData: [],
-      testArray: [1, 2, 3],
+      chartData: null,
     };
   },
   computed: {},

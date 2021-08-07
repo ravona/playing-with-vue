@@ -27,15 +27,17 @@ export default {
     // functions that change the PRESENTATION of data:
   },
   created() {
-    Chart.register(...registerables);
+    console.log("created: ", this.$data);
     this.parseChartData();
     this.setChartConfig(
-      this.$data.parsedChartData.vehicle,
-      this.$data.parsedChartData.price
+      this.parsedChartData.vehicle,
+      this.parsedChartData.price
     );
   },
   mounted() {
-    this.renderChart(this.$data.chartType, this.$data.chartConfig);
+    console.log("mounted: ", this.$data);
+    Chart.register(...registerables);
+    this.renderChart(this.chartType, this.chartConfig);
   },
   methods: {
     // functions that change data:
@@ -53,6 +55,8 @@ export default {
         },
         {}
       );
+
+      return this.parsedChartData;
     },
     setChartConfig(labels, data) {
       this.chartConfig = {
