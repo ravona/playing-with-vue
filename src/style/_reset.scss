@@ -1,3 +1,39 @@
 a {
   text-decoration: none;
+  color: $color-links;
+
+  &:hover {
+    color: $color-links--hover;
+  }
+}
+
+body {
+  color: $color-primary;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $color-secondary;
+}
+
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+  background-color: $color-buttons-bg;
+  color: $color-buttons-text;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+  border-radius: 5px;
+  transition: all 0.5s ease;
+  display: block;
+
+  &:hover {
+    background-color: darken($color-buttons-bg, 5%);
+    transition: all 0.5s ease;
+  }
 }

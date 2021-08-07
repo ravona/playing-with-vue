@@ -17,5 +17,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "../style/colors";
+button {
+  margin: 0 auto;
+}
 </style>

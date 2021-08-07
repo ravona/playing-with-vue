@@ -10,6 +10,9 @@ import { Chart, registerables } from "chart.js";
 export default {
   name: "Chart",
   props: {
+    shouldToggleChartType: {
+      type: Boolean,
+    },
     chartData: {
       type: Array,
       required: true,
@@ -21,27 +24,47 @@ export default {
       chartType: "pie",
       parsedChartData: null,
       chartConfig: null,
+      chartElement: null,
     };
   },
-  computed: {
-    // functions that change the PRESENTATION of data:
+  watch: {
+    chartData: {
+      immediate: true,
+      handler(newChartData) {
+        this.parseChartData(newChartData);
+        this.setChartConfig(newChartData);
+      },
+    },
+    shouldToggleChartType: {
+      immediate: true,
+      handler(toggleState) {
+        this.toggleChartType(toggleState);
+      },
+    },
+    // chartConfig: {
+    //   immediate: true,
+    //   handler(chartConfig, chartType) {
+    //     this.renderChart(chartConfig, chartType);
+    //   },
+    // },
   },
   created() {
     console.log("created: ", this.$data);
-    this.parseChartData();
-    this.setChartConfig(
-      this.parsedChartData.vehicle,
-      this.parsedChartData.price
-    );
   },
   mounted() {
     console.log("mounted: ", this.$data);
     Chart.register(...registerables);
+    this.parseChartData(this.chartData);
+    this.setChartConfig(
+      this.parsedChartData.vehicle,
+      this.parsedChartData.price
+    );
+
     this.renderChart(this.chartType, this.chartConfig);
   },
   methods: {
-    // functions that change data:
     parseChartData() {
+      // Transforms an array of objects to arrays grouped by value type ([...vehicles], [...prices])
       this.parsedChartData = this.chartData.reduce(
         (accumulator, currentValue) => {
           // eslint-disable-next-line no-restricted-syntax
@@ -55,7 +78,6 @@ export default {
         },
         {}
       );
-
       return this.parsedChartData;
     },
     setChartConfig(labels, data) {
@@ -81,8 +103,14 @@ export default {
         data: chartConfig,
       };
 
-      const result = new Chart("myChart", config);
-      return result;
+      this.chartElement = new Chart("myChart", config);
+    },
+    toggleChartType() {
+      if (this.shouldToggleChartType === true) {
+        this.chartType = "polarArea";
+      } else {
+        this.chartType = "pie";
+      }
     },
   },
 };

@@ -1,6 +1,8 @@
 <template>
+  <!-- header component: -->
   <img class="logo" alt="ironSource logo" src="./assets/logo.svg" />
   <h1 class="title">Vue.js app by Asaf Ravona</h1>
+
   <Nav />
   <router-view></router-view>
 </template>
@@ -25,10 +27,6 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   margin: 1rem;
-}
-
-.title {
-  color: $color-primary;
 }
 
 .logo {

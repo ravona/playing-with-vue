@@ -1,23 +1,31 @@
 <template>
   <h1>Charts Page</h1>
   <div v-if="chartData">
-    <Chart :chart-data="chartData" />
+    <Chart
+      :chart-data="chartData"
+      :should-toggle-chart-type="shouldToggleChartType"
+    />
   </div>
-  <Button text="Remove Vehicle" @cbFunc="removeRandomItem"
-    >Remove Vehicle</Button
-  >
-  <Button text="Randomize Chart Type" @cbFunc="randomizeChartType">
-    Randomize Chart Type
-  </Button>
+
+  <div class="chart__menu">
+    <Button text="Remove Vehicle" @cbFunc="removeRandomItem"
+      >Remove Vehicle</Button
+    >
+    <Button text="Randomize Chart Type" @cbFunc="randomizeChartType">
+      Randomize Chart Type
+    </Button>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
-// import getRandomArrayItem from "../utils/getRandomArrayItem";
 
 // components
 import Chart from "../components/Chart.vue";
 import Button from "../components/Button.vue";
+
+// utils
+import getRandomArrayItem from "../utils/getRandomArrayItem";
 
 export default {
   name: "ChartsPage",
@@ -28,6 +36,7 @@ export default {
   emits: ["removeRandomItem", "randomizeChartType"],
   data() {
     return {
+      shouldToggleChartType: false,
       chartData: null,
     };
   },
@@ -44,11 +53,21 @@ export default {
   },
   methods: {
     removeRandomItem() {
-      console.log("remove Random Item");
+      const randomlySelectedIndex = getRandomArrayItem(this.chartData);
+
+      this.chartData = this.chartData.filter(
+        (items, index) => index !== randomlySelectedIndex
+      );
     },
     randomizeChartType() {
-      console.log("Randomize Chart Type");
+      this.shouldToggleChartType = !this.shouldToggleChartType;
     },
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.chart__menu {
+  margin-top: 2rem;
+}
+</style>
