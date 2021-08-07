@@ -24,30 +24,27 @@ export default {
       chartType: "pie",
       parsedChartData: null,
       chartConfig: null,
-      chartElement: null,
     };
   },
   watch: {
     chartData: {
-      immediate: true,
       handler(newChartData) {
         this.parseChartData(newChartData);
-        this.setChartConfig(newChartData);
       },
     },
-    shouldToggleChartType: {
-      immediate: true,
-      handler(toggleState) {
-        this.toggleChartType(toggleState);
-      },
-    },
+    // TODO
     // chartConfig: {
-    //   immediate: true,
     //   handler(chartConfig, chartType) {
     //     this.renderChart(chartConfig, chartType);
     //   },
     // },
+    shouldToggleChartType: {
+      handler(toggleState) {
+        this.toggleChartType(toggleState);
+      },
+    },
   },
+
   created() {
     console.log("created: ", this.$data);
   },
@@ -80,6 +77,8 @@ export default {
       );
       return this.parsedChartData;
     },
+
+    // Transforms an array of objects to arrays grouped by value type ([...vehicles], [...prices])
     setChartConfig(labels, data) {
       this.chartConfig = {
         labels,
