@@ -105,11 +105,9 @@ export default {
       this.chartElement = new Chart("myChart", config);
     },
     toggleChartType() {
-      if (this.shouldToggleChartType === true) {
-        this.chartType = "polarArea";
-      } else {
-        this.chartType = "pie";
-      }
+      this.shouldToggleChartType === true
+        ? (this.chartType = "polarArea")
+        : (this.chartType = "pie");
     },
   },
 };
