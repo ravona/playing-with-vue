@@ -119,7 +119,6 @@ export default {
 }
 
 #myChart {
-  border: 3px dashed darkred;
   height: 360px;
   width: 360px;
   margin: 0 auto;
