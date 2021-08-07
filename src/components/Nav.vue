@@ -14,20 +14,20 @@
 
 <script>
 export default {
-    name: 'ChartsPage'
-}
+  name: "ChartsPage",
+};
 </script>
 
 <style lang="scss" scoped>
-    @import '../style/colors';
+@import "../style/colors";
 
-    .nav__menu {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+.nav__menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    .nav__item {
-        font-size: 1.5rem;
-    }
+.nav__item {
+  font-size: 1.5rem;
+}
 </style>

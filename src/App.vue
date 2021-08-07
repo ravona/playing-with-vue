@@ -1,7 +1,7 @@
 <template>
-  <img class="logo" alt="ironSource logo" src="./assets/logo.svg">
+  <img class="logo" alt="ironSource logo" src="./assets/logo.svg" />
   <h1 class="title">Vue.js app by Asaf Ravona</h1>
-  <Nav/>
+  <Nav />
   <router-view></router-view>
 </template>
 
@@ -9,19 +9,18 @@
 import Nav from "./components/Nav.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Nav,
-  }
-}
+  },
+};
 </script>
 
 <style lang="scss">
-@import './style/style.scss';
+@import "./style/style.scss";
 
 #app {
-  height: 100vh;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Raleway", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -33,7 +32,6 @@ export default {
 }
 
 .logo {
-  width: 20vw;
+  width: 180px;
 }
-
 </style>

@@ -1,40 +1,53 @@
 <template>
-    <h1>Charts Page</h1>
-    <chart :chartData="this.chartData" :chartType="chartType"/>
+  <h1>Charts Page</h1>
+  <Chart :chart-data="chartData" />
+  <Button text="Remove Vehicle" @cbFunc="removeRandomItem"
+    >Remove Vehicle</Button
+  >
+  <Button text="Randomize Chart Type" @cbFunc="randomizeChartType">
+    Randomize Chart Type
+  </Button>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
+// import getRandomArrayItem from "../utils/getRandomArrayItem";
 
 // components
-import Chart from '../components/Chart.vue'
+import Chart from "../components/Chart.vue";
+import Button from "../components/Button.vue";
 
 export default {
-    name: 'ChartsPage',
-      components: {
+  name: "ChartsPage",
+  components: {
     Chart,
+    Button,
   },
-    data() {
-        return {
-            chartData: [],
-            chartType: "pie"
-        }
+  emits: ["removeRandomItem", "randomizeChartType"],
+  data() {
+    return {
+      chartData: [],
+      testArray: [1, 2, 3],
+    };
+  },
+  computed: {},
+  async created() {
+    await axios
+      .get("https://610a491f52d56400176afcc5.mockapi.io/vehicles")
+      .then((res) => {
+        this.chartData = res.data;
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the data: ", error);
+      });
+  },
+  methods: {
+    removeRandomItem() {
+      console.log("remove Random Item");
     },
-    methods: {
-        async getChartData() {
-            try {
-            const { data } = await axios.get('https://610a491f52d56400176afcc5.mockapi.io/vehicles');
-            this.chartData = data
-            console.log('response.data', data);
-            } 
-            catch(error) {
-                console.log('There was an error fetching the data: ', error)
-            }
-            }
-
+    randomizeChartType() {
+      console.log("Randomize Chart Type");
     },
-    beforeMount() {
-        this.getChartData()
-    }
-}
+  },
+};
 </script>

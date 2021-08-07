@@ -1,72 +1,98 @@
 <template>
   <div :class="['chart', `chart--${chartType}`]">
-    <canvas id="myChart" width="400" height="400"></canvas>
+    <canvas id="myChart" width="400" height="400" />
   </div>
 </template>
 
 <script>
-import { Chart, registerables } from 'chart.js';
-
-const staticData = {
-  labels: [
-    "Volkswagen",
-    "Land Rover Spyder",
-    "Mini Grand Cherokee",
-    "Mini CTS",
-  ],
-  datasets: [
-    {
-      label: "My First Dataset",
-      data: [869.0, 334.0, 39.0, 705.0],
-      backgroundColor: [
-        "rgb(255, 99, 132)",
-        "rgb(54, 162, 235)",
-        "rgb(255, 205, 86)",
-        "rgb(255, 0, 100)",
-      ],
-      hoverOffset: 4,
-    },
-  ],
-};
+import { Chart, registerables } from "chart.js";
 
 export default {
-  name: 'chart',
-  props: ['chartData', 'chartType'],
-  methods: {
-    // TODO: add parameter chartData
-    initChart(staticData, param_type) {
-
-//       const getParsedChartData = staticData.reduce((accumulator, currentValue) => {
-//   for (const [key, value] of Object.entries(currentValue)) {
-//     if (!accumulator[key]) {
-//       accumulator[key] = [];
-//     }
-//     accumulator[key].push(value);
-//   }
-//   return accumulator;
-// }, {});
-
-// console.log(getParsedChartData)
-
-    const config = {
-      type: param_type,
-      data: staticData,
-    };
-
-new Chart('myChart', config)
-    }
+  name: "Chart",
+  props: {
+    chartData: {
+      type: Array,
+      required: true,
+    },
   },
-  beforeCreate() {
-    Chart.register(...registerables)
+  data() {
+    // state
+    return {
+      chartType: "pie",
+      parsedChartData: null,
+      chartConfig: null,
+    };
+  },
+  computed: {
+    // functions that change the PRESENTATION of data:
+  },
+  created() {
+    Chart.register(...registerables);
+    this.parseChartData();
+    this.setChartConfig(
+      this.$data.parsedChartData.vehicle,
+      this.$data.parsedChartData.price
+    );
   },
   mounted() {
-    this.initChart(staticData, "pie")
-  }
-}
+    this.renderChart(this.$data.chartType, this.$data.chartConfig);
+  },
+  methods: {
+    // functions that change data:
+    parseChartData() {
+      this.parsedChartData = this.chartData.reduce(
+        (accumulator, currentValue) => {
+          // eslint-disable-next-line no-restricted-syntax
+          for (const [key, value] of Object.entries(currentValue)) {
+            if (!accumulator[key]) {
+              accumulator[key] = [];
+            }
+            accumulator[key].push(value);
+          }
+          return accumulator;
+        },
+        {}
+      );
+    },
+    setChartConfig(labels, data) {
+      this.chartConfig = {
+        labels,
+        datasets: [
+          {
+            label: "AdIntel Chart",
+            data,
+            backgroundColor: [
+              "rgb(255, 100, 50)",
+              "rgb(50, 255, 100)",
+              "rgb(100, 50, 255)",
+            ],
+            hoverOffset: 4,
+          },
+        ],
+      };
+    },
+    renderChart(chartType, chartConfig) {
+      const config = {
+        type: chartType,
+        data: chartConfig,
+      };
+
+      const result = new Chart("myChart", config);
+      return result;
+    },
+  },
+};
 </script>
 
 <style scoped>
 .chart {
-  outline: 3px solid red;
+  height: auto;
+}
+
+#myChart {
+  border: 3px dashed darkred;
+  height: 360px;
+  width: 360px;
+  margin: 0 auto;
 }
 </style>
