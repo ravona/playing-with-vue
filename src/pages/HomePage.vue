@@ -1,13 +1,18 @@
 <template>
-  <h1>Home Page</h1>
-  <button class="button" type="button">
-    <router-link to="/charts">Charts</router-link>
-  </button>
+  <Header title="Home Page" subtitle="There's no place like home" />
+  <main class="main">
+    <p>Check out "charts" page</p>
+  </main>
 </template>
 
 <script>
+import Header from "../components/Header.vue";
+
 export default {
   name: "HomePage",
+  components: {
+    Header,
+  },
 };
 </script>
 

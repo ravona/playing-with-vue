@@ -1,18 +1,16 @@
 <template>
-  <Header />
-  <Nav />
+  <Topbar />
+
   <router-view></router-view>
 </template>
 
 <script>
-import Nav from "./components/Nav.vue";
-import Header from "./components/Header.vue";
+import Topbar from "./components/Topbar.vue";
 
 export default {
   name: "App",
   components: {
-    Header,
-    Nav,
+    Topbar,
   },
 };
 </script>
@@ -25,6 +23,5 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin: 1rem;
 }
 </style>

@@ -16,8 +16,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-button {
-  margin: 0 auto;
-}
-</style>
+<style lang="scss" scoped></style>

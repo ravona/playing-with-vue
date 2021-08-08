@@ -1,5 +1,5 @@
 <template>
-  <h1>Charts Page</h1>
+  <Header title="Charts Page" subtitle="Let's talk figures" />
   <div v-if="chartData">
     <Chart
       :chart-data="chartData"
@@ -7,7 +7,7 @@
     />
   </div>
 
-  <div class="chart__menu">
+  <div class="Menu">
     <Button text="Remove Vehicle" @cbFunc="removeRandomItem" />
     <Button text="Toggle Chart Type" @cbFunc="randomizeChartType" />
   </div>
@@ -17,6 +17,7 @@
 import axios from "axios";
 
 // components
+import Header from "../components/Header.vue";
 import Chart from "../components/Chart.vue";
 import Button from "../components/Button.vue";
 
@@ -26,6 +27,7 @@ import getRandomArrayItem from "../utils/getRandomArrayItem";
 export default {
   name: "ChartsPage",
   components: {
+    Header,
     Chart,
     Button,
   },
@@ -63,7 +65,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.chart__menu {
-  margin-top: 2rem;
+@import "../style/global";
+@import "../style/colors";
+
+.Menu {
+  margin: 1.5rem 0;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1rem;
+
+  @media only screen and (min-width: map-get($screen_sizes, $key: "tablet" )) {
+    justify-content: center;
+    flex-direction: row;
+  }
 }
 </style>

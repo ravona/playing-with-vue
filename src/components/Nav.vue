@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: "ChartsPage",
+  name: "Nav",
 };
 </script>
 
@@ -33,11 +33,18 @@ export default {
 }
 
 .nav__item {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  margin: 2rem 0;
+  border: 2px solid $color-primary;
 
   @media only screen and (min-width: map-get($screen_sizes, $key: "desktop" )) {
-    margin: 0 1rem;
+    margin: 0 0.5rem;
+  }
+
+  a {
+    padding: 5px 12px;
+    line-height: 1.5;
+    text-transform: uppercase;
   }
 }
 </style>

@@ -1,7 +1,9 @@
 <template>
-  <h5>You are watching a {{ chartType }} chart</h5>
-  <div :class="['chart', `chart--${chartType}`]">
-    <canvas id="mainChart" />
+  <div class="Chart">
+    <h5 class="Chart__title">You are watching a {{ chartType }} chart</h5>
+    <div class="Chart__body" :class="['chart', `chart--${chartType}`]">
+      <canvas id="mainChart" />
+    </div>
   </div>
 </template>
 
@@ -46,11 +48,12 @@ export default {
             label: "AdIntel Chart",
             data: this.parsedChartData.price,
             backgroundColor: [
-              "rgb(255, 100, 50)",
-              "rgb(50, 255, 100)",
-              "rgb(100, 50, 255)",
-              "rgb(70, 50, 20)",
-              "rgb(50, 200, 200)",
+              "rgb(0, 150, 136)",
+              "rgb(0, 188, 212)",
+              "rgb(233, 30, 99)",
+              "rgb(76, 175, 80)",
+              "rgb(63, 81, 181)",
+              "",
             ],
             hoverOffset: 4,
           },
@@ -100,9 +103,14 @@ export default {
 };
 </script>
 
-<style scoped>
-.chart {
-  height: auto;
+<style lang="scss" scoped>
+.Chart {
+  &__title {
+    padding: 0 1rem;
+    font-size: 1.618rem;
+    margin-top: 1.618rem;
+    margin-bottom: 1rem;
+  }
 }
 
 #mainChart {
