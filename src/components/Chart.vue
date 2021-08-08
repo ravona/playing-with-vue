@@ -114,8 +114,8 @@ export default {
 }
 
 #mainChart {
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
   margin: 0 auto;
 }
 </style>
