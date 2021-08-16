@@ -42,18 +42,17 @@ export default {
 
     chartConfig() {
       return {
-        labels: this.parsedChartData.vehicle,
+        labels: this.parsedChartData.country,
         datasets: [
           {
-            label: "AdIntel Chart",
-            data: this.parsedChartData.price,
+            label: "World Avocado Production by Country",
+            data: this.parsedChartData.production,
             backgroundColor: [
               "rgb(0, 150, 136)",
               "rgb(0, 188, 212)",
               "rgb(233, 30, 99)",
               "rgb(76, 175, 80)",
               "rgb(63, 81, 181)",
-              "",
             ],
             hoverOffset: 4,
           },
@@ -96,7 +95,7 @@ export default {
     },
     toggleChartType() {
       this.shouldToggleChartType === true
-        ? (this.chartType = "polarArea")
+        ? (this.chartType = "bar")
         : (this.chartType = "pie");
     },
   },
@@ -114,8 +113,8 @@ export default {
 }
 
 #mainChart {
-  height: 400px;
-  width: 400px;
+  height: 500px;
+  width: 300px;
   margin: 0 auto;
 }
 </style>

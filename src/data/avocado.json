@@ -1,0 +1,52 @@
+[
+  {
+    "country": "Mexico",
+    "production": 2184663,
+    "id": "1"
+  },
+  {
+    "country": "Dominican Republic",
+    "production": 644306,
+    "id": "2"
+  },
+  {
+    "country": "Peru",
+    "production": 504517,
+    "id": "3"
+  },
+  {
+    "country": "Indonesia",
+    "production": 410094,
+    "id": "4"
+  },
+  {
+    "country": "Colombia",
+    "production": 326666,
+    "id": "5"
+  },
+  {
+    "country": "Brazil",
+    "production": 235788,
+    "id": "6"
+  },
+  {
+    "country": "Kenya",
+    "production": 233933,
+    "id": "7"
+  },
+  {
+    "country": "USA",
+    "production": 168528,
+    "id": "8"
+  },
+  {
+    "country": "Venezuela",
+    "production": 139685,
+    "id": "9"
+  },
+  {
+    "country": "Israel",
+    "production": 131720,
+    "id": "10"
+  }
+]

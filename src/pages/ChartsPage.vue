@@ -1,5 +1,7 @@
 <template>
   <Header title="Charts Page" subtitle="Let's talk figures" />
+  <h4>World Avocado Production by Country (in tons)</h4>
+
   <div v-if="chartData">
     <Chart
       :chart-data="chartData"
@@ -8,9 +10,16 @@
   </div>
 
   <div class="Menu">
-    <Button text="Remove Vehicle" @cbFunc="removeRandomItem" />
-    <Button text="Toggle Chart Type" @cbFunc="randomizeChartType" />
+    <Button text="Remove Country" @cbFunc="removeRandomItem" />
+    <Button text="Toggle Chart Type" @cbFunc="toggleChartType" />
   </div>
+
+  <footer>
+    <span>Source for the data: </span>
+    <a href="https://www.atlasbig.com/en-gb/countries-by-avocado-production"
+      >Atlasbig</a
+    >
+  </footer>
 </template>
 
 <script>
@@ -31,7 +40,7 @@ export default {
     Chart,
     Button,
   },
-  emits: ["removeRandomItem", "randomizeChartType"],
+  emits: ["removeRandomItem", "toggleChartType"],
   data() {
     return {
       shouldToggleChartType: false,
@@ -41,7 +50,7 @@ export default {
   computed: {},
   async created() {
     await axios
-      .get("https://610a491f52d56400176afcc5.mockapi.io/vehicles")
+      .get("https://611a2781cbf1b30017eb5532.mockapi.io/productionByCountry")
       .then((res) => {
         this.chartData = res.data;
       })
@@ -57,7 +66,7 @@ export default {
         (items, index) => index !== randomlySelectedIndex
       );
     },
-    randomizeChartType() {
+    toggleChartType() {
       this.shouldToggleChartType = !this.shouldToggleChartType;
     },
   },

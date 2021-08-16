@@ -2,8 +2,8 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 
-const AdIntel = createApp(App);
+const GoFigureApp = createApp(App);
 
-AdIntel.use(router);
+GoFigureApp.use(router);
 
-AdIntel.mount("#app");
+GoFigureApp.mount("#app");
